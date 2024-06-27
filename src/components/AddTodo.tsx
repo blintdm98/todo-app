@@ -1,16 +1,26 @@
-import React, { useEffect } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { addDoc, collection,  } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 
 type TodoState = {
-    id: number,
-    todo: string
+    todo: string,
+    done: false
 }
 
 function AddTodo() {
     const { register, handleSubmit, formState: { errors, touchedFields } } = useForm<TodoState>();
-    const onSubmit = (data: TodoState) => {
-        console.log(data)
+    const onSubmit = async (data: TodoState) => {
+        try {
+            await addDoc(collection(db, 'todos'), {
+                todo: data.todo,
+                done: false,
+                createdAt: new Date(),
+            });
+            console.log("todo added") 
+        } catch (err) {
+            console.error("error", err);
+        }
     };
     return (
         <Box sx={{ display: 'flex', width:'80%', mb: 2 }}
