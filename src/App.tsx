@@ -20,8 +20,6 @@ function App() {
         >
           <AddTodo/>
           <TodoList/>
-          <TodoList/>
-          <TodoList/>
         </Box>
       </Container>
   );

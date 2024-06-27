@@ -2,7 +2,11 @@ import React from 'react';
 import { Card, CardContent, IconButton, Typography } from '@mui/material';
 import { Check, Delete } from '@mui/icons-material'
 
-function TodoItem() {
+type TodoItemProps = {
+  todoText: string;
+};
+
+function TodoItem({todoText}: TodoItemProps) {
   return (
     <Card 
         variant="outlined"
@@ -15,7 +19,7 @@ function TodoItem() {
             <IconButton>
                 <Check sx={{ color: 'green'}}/>
             </IconButton>
-            todo text
+            {todoText}
             <IconButton sx={{ float: 'right' }}>
                 <Delete/>
             </IconButton>
