@@ -21,8 +21,8 @@ function App() {
             backgroundColor: 'rgba(255, 255, 255, 0.4);'
           }}
         >
-        <AddTodo/>
-        <TodoList/>
+          <AddTodo/>
+          <TodoList/>
         </Box>
       </Container>
   );

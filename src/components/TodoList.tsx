@@ -1,15 +1,13 @@
-import { Box } from '@mui/material';
 import React from 'react';
+import TodoItem from './TodoItem';
+import { CardContent } from '@mui/material';
 
-interface Todo {
-  id: number;
-  text: string;
-  completed: boolean;
-}
 function TodoList() {
   return (
-    <Box>list</Box>
+    <CardContent sx={{width: '80%'}}>
+        <TodoItem/>
+    </CardContent>
   );
-};
+}
 
 export default TodoList;
