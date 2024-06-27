@@ -5,23 +5,22 @@ import TodoList from './components/TodoList';
 
 function App() {
   return (
-      <Container maxWidth='md'>
+      <Container sx={{paddingTop: '10px',width: {sm:'100%', md:'80%', lg: '100vh'}}}>
         <Box 
           sx={{
-            position: 'relative',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'start',
             boxShadow: 3,
             borderRadius: 2,
             p: 3,
             height: '90vh',
-            width: '100vh',
             backgroundColor: 'rgba(255, 255, 255, 0.4);'
           }}
         >
           <AddTodo/>
+          <TodoList/>
+          <TodoList/>
           <TodoList/>
         </Box>
       </Container>
