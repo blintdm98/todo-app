@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+## Todo App with Firebase Firestore and React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple Todo application built using React and Firebase Firestore. Users can add, edit, delete, and mark todos as complete. The app is responsive and adjusts to different screen sizes (mobile, tablet, desktop).
 
-## Available Scripts
+### Features
 
-In the project directory, you can run:
+Todo Management: Users can add new todos, mark them as complete, edit existing todos, and delete todos.
 
-### `npm start`
+Real-time Updates: Todos are synchronized in real-time using Firebase Firestore.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Responsive Design: The application is responsive and works well across various devices.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Technologies Used
 
-### `npm test`
+React: Front-end library for building user interfaces.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Firebase Firestore: Cloud Firestore database from Firebase for storing todos.
 
-### `npm run build`
+Firebase Authentication: Firebase Authentication for user authentication and authorization.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Material-UI: React component library for UI design.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+react-hook-form: Library for managing form state and validation in React.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Access the application
 
-### `npm run eject`
+Open https://todo-app-blintdm.web.app/ in your browser to view the Todo app.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Folder structure
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+src/: Contains all source code files.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+components/: React components used in the application.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+firebaseConfig.ts: Firebase configuration file.
 
-## Learn More
+App.tsx: Main application component.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+index.tsx: Entry point of the application.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+public/: Public assets and index.html.
+
+## Usage
+
+Add Todo: Click on the "Add Todo" input field, type a new todo, and press "Add".
+
+Edit Todo: Click on the edit icon next to a todo, modify the text, and press the check icon to save changes.
+
+Mark as Complete: Click on the check icon next to a todo to mark it as complete.
+
+Delete Todo: Click on the delete icon next to a todo to delete it permanently.
