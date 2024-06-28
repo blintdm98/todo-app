@@ -4,6 +4,7 @@ import { Check, Delete, Edit } from '@mui/icons-material'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { blue } from '@mui/material/colors';
 import { db } from '../firebaseConfig';
+import { useAuth } from './AuthProvider';
 
 type TodoItemProps = {
   id: string,
@@ -12,6 +13,7 @@ type TodoItemProps = {
 };
 
 function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
+  const { currentUser } = useAuth();
   const theme = useTheme();
   const [todoText, setTodoText] = useState(initText);
   const [done, setDone] = useState(initDone);
@@ -28,6 +30,7 @@ function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
   };
 
   const handleComplete = async () => {
+    if (!currentUser) return;
     try {
       const todoDoc = doc(db, 'todos', id);
       await updateDoc(todoDoc, {done: !done});

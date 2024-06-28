@@ -2,13 +2,16 @@ import { Box, Button, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { addDoc, collection,  } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import { useAuth } from './AuthProvider';
 
 type TodoState = {
     todo: string,
-    done: false
+    done: false,
+    userId: string
 }
 
 function AddTodo() {
+    const { currentUser } = useAuth();
     const { register, handleSubmit, formState: { errors, touchedFields } } = useForm<TodoState>();
 
     const onSubmit = async (data: TodoState) => {
@@ -17,6 +20,7 @@ function AddTodo() {
                 todo: data.todo,
                 done: false,
                 createdAt: new Date(),
+                userId: currentUser!.uid,
             });
             console.log("todo added") 
         } catch (err) {
