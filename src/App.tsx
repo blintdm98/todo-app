@@ -1,14 +1,14 @@
 import React from 'react';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
 import Register from './components/Register';
 import Login from './components/Login';
-import { AuthProvider } from './components/AuthProvider';
+import { AuthProvider, useAuth } from './components/AuthProvider';
 
-function App() {
+function AppContent() {
+  const { currentUser, signOut } = useAuth();
   return (
-    <AuthProvider>
       <Container sx={{paddingTop: '10px',width: {sm:'100%', md:'80%', lg: '100vh'}}}>
         <Box 
           className="scroll-box"
@@ -28,12 +28,30 @@ function App() {
           <Typography variant="h3" gutterBottom>
             Todo App
           </Typography>
-          <Register />
-          <Login />
-          <AddTodo />
-          <TodoList/>
+          {currentUser ? (
+              <>
+                <Button onClick={signOut} variant="contained" color="secondary" sx={{ marginBottom: '1rem' }}>
+                Sign Out
+                </Button>
+                <AddTodo />
+                <TodoList />
+              </>
+          ) : (
+            <>
+              <Register />
+              <Box sx={{padding: '2rem'}}>or</Box>
+              <Login />
+            </>
+          )}
         </Box>
       </Container>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
     </AuthProvider>
   );
 }

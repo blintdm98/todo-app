@@ -5,6 +5,7 @@ import { auth } from '../firebaseConfig';
 type AuthContextType = {
   currentUser: User | null;
   userLoggedIn: boolean;
+  signOut: () => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -35,9 +36,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => unsubscribe();
   }, []);
 
+  const signOut = async () => {
+    await auth.signOut();
+  };
+
   const value: AuthContextType = {
     currentUser,
     userLoggedIn,
+    signOut,
   };
 
   return (
