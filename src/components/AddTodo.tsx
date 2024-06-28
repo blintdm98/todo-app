@@ -10,6 +10,7 @@ type TodoState = {
 
 function AddTodo() {
     const { register, handleSubmit, formState: { errors, touchedFields } } = useForm<TodoState>();
+
     const onSubmit = async (data: TodoState) => {
         try {
             await addDoc(collection(db, 'todos'), {
@@ -31,11 +32,15 @@ function AddTodo() {
                     label="Add Todo" 
                     variant="outlined"
                     fullWidth 
-                    {...register("todo", {maxLength: 50, required:"there is no todo"})}
-                    // error={!!errors.todo && touchedFields.todo}
-                    // helperText={touchedFields.todo && errors.todo ? errors.todo.message : ''} 
+                    {...register("todo", {maxLength: 50, required:"There is no todo item. Please enter a todo before adding."})}
+                    error={!!errors.todo && touchedFields.todo}
+                    helperText={touchedFields.todo && errors.todo ? errors.todo.message : ''} 
                     />
-                <Button variant="contained" color="primary" sx={{ ml: 2 }} type='submit'>
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    sx={{ ml: 2, maxHeight:'56px' }} 
+                    type='submit'>
                     Add
                 </Button>
             </form>

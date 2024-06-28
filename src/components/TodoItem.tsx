@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, Grid, IconButton, TextField, Typography, useTheme } from '@mui/material';
 import { Check, Delete, Edit } from '@mui/icons-material'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { blue } from '@mui/material/colors';
 import { db } from '../firebaseConfig';
 
 type TodoItemProps = {
@@ -62,10 +63,10 @@ function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
     <Card 
         variant="outlined"
         sx={{
-          bgcolor: done ? theme.palette.success.dark : 'lightgray',
+          bgcolor: done ? theme.palette.success.dark : blue[100],
         }}
     >
-      <CardContent padding-bottom="0">
+      <CardContent padding-bottom="0" sx={{borderRadius: '1rem'}}>
       {edit ? (
           <TextField
             fullWidth
@@ -81,7 +82,7 @@ function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
         >
           <Grid item xs={2} sm="auto">
             <IconButton onClick={handleComplete}>
-              <Check sx={{ color: 'green' }} />
+              <Check sx={{ color: theme.palette.success.light }} />
             </IconButton>
           </Grid>
           <Grid item xs={10} sm>
