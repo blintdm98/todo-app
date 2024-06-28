@@ -13,7 +13,7 @@ const firebaseConfig = {
   appId: "1:1080262121080:web:d6122d896d7cc29d733f8d"
 };
 
-//test database
+// test database
 // const firebaseConfig = {
 //     apiKey: "AIzaSyA9XL-smwP7Zc17qwd2sY4Y5Z_tBKXrJ3A",
 //     authDomain: "todo-app-test-blintdm.firebaseapp.com",

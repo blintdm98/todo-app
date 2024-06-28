@@ -85,7 +85,7 @@ function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
             </IconButton>
           </Grid>
           <Grid item xs={10} sm>
-            <Typography component='span' font-size="1.5rem">
+            <Typography component='span' sx={{fontSize:'1.5rem'}}>
               {todoText}
             </Typography>
           </Grid>

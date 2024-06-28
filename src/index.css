@@ -3,7 +3,7 @@ body {
   font-weight: 400;
   height: 100vh;
   color: #333;
-  background-image: linear-gradient(to top left, #753682 0%, #bf2e34 100%);
+  background-image: linear-gradient(to top left, #00008B 0%, #87CEEB 100%);
   /* display: flex; */
   /* align-items: center;
   justify-content: center;*/
@@ -12,4 +12,18 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.scroll-box {
+  max-height: 74vh;
+  overflow-y: auto;
+}
+
+.scroll-box::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
 }

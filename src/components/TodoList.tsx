@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TodoItem from './TodoItem';
-import { CardContent } from '@mui/material';
+import { Box, CardContent } from '@mui/material';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
@@ -29,10 +29,12 @@ function TodoList() {
           return() => unsubscribe();
     })
   return (
-    <CardContent sx={{ padding: '1px', width: '80%'}}>
+    <CardContent sx={{ padding: '1px', width: '80%', marginBottom: '1rem'}}>
         { todo && todo.map((todo: TodoState) => {
             return (
+              <Box key={todo.id} sx={{ marginBottom: '1rem' }}>
                 <TodoItem key={todo.id} id={todo.id} todo={todo.todo} done={todo.done}/>
+              </Box>
             )
         })}
     </CardContent>

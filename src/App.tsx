@@ -7,6 +7,7 @@ function App() {
   return (
       <Container sx={{paddingTop: '10px',width: {sm:'100%', md:'80%', lg: '100vh'}}}>
         <Box 
+          className="scroll-box"
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -15,7 +16,9 @@ function App() {
             borderRadius: 2,
             p: 3,
             height: '90vh',
-            backgroundColor: 'rgba(255, 255, 255, 0.4);'
+            backgroundColor: 'rgba(255, 255, 255, 0.4);',
+            overflow: 'auto',
+            maxHeight: '100%'
           }}
         >
           <AddTodo/>

@@ -27,8 +27,10 @@ function AddTodo() {
         >
             <form onSubmit={handleSubmit(onSubmit)} style={{display: 'flex', width: '100%'}}>
                 <TextField 
+                    id="outlined-basic" 
+                    label="Add Todo" 
+                    variant="outlined"
                     fullWidth 
-                    placeholder="Add Todo" 
                     {...register("todo", {maxLength: 50, required:"there is no todo"})}
                     // error={!!errors.todo && touchedFields.todo}
                     // helperText={touchedFields.todo && errors.todo ? errors.todo.message : ''} 
