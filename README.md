@@ -4,6 +4,8 @@ A simple Todo application built using React and Firebase Firestore. Users can ad
 
 ### Features
 
+Authentication: Users can sign up, log in, and log out securely using Firebase Authentication.
+
 Todo Management: Users can add new todos, mark them as complete, edit existing todos, and delete todos.
 
 Real-time Updates: Todos are synchronized in real-time using Firebase Firestore.
@@ -41,6 +43,7 @@ index.tsx: Entry point of the application.
 public/: Public assets and index.html.
 
 ## Usage
+Sign Up/Login: Users can sign up for a new account or log in using existing credentials.
 
 Add Todo: Click on the "Add Todo" input field, type a new todo, and press "Add".
 
