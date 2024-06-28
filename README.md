@@ -26,7 +26,7 @@ react-hook-form: Library for managing form state and validation in React.
 
 ### Access the application
 
-Open https://todo-app-blintdm.web.app/ in your browser to view the Todo app.
+Open [TodoApp](https://todo-app-blintdm.web.app/) in your browser to view the Todo app.
 
 ### Folder structure
 
