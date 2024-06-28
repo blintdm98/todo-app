@@ -6,7 +6,8 @@ import { db } from '../firebaseConfig';
 
 type TodoState = {
     id: string,
-    todo: string
+    todo: string,
+    done:boolean
 }
 
 function TodoList() {
@@ -17,7 +18,10 @@ function TodoList() {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const todosData: TodoState[] = [];
             querySnapshot.forEach((doc) => {
-              todosData.push({ id: doc.id, todo: doc.data().todo });
+              todosData.push({
+                id: doc.id,
+                todo: doc.data().todo,
+                done: doc.data().done });
             });
             setTodo(todosData);
           });
@@ -28,7 +32,7 @@ function TodoList() {
     <CardContent sx={{ padding: '1px', width: '80%'}}>
         { todo && todo.map((todo: TodoState) => {
             return (
-                <TodoItem key={todo.id} id={todo.id} todoText={todo.todo}/>
+                <TodoItem key={todo.id} id={todo.id} todoText={todo.todo} done={todo.done}/>
             )
         })}
     </CardContent>
