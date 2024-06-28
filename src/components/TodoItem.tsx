@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, IconButton, TextField, Typography, useTheme } from '@mui/material';
+import { Card, CardContent, Grid, IconButton, TextField, Typography, useTheme } from '@mui/material';
 import { Check, Delete, Edit } from '@mui/icons-material'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
@@ -65,7 +65,7 @@ function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
           bgcolor: done ? theme.palette.success.dark : 'lightgray',
         }}
     >
-      <CardContent>
+      <CardContent padding-bottom="0">
       {edit ? (
           <TextField
             fullWidth
@@ -73,21 +73,37 @@ function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
             onChange={(e) => setTodoText(e.target.value)}
           />
         ) : (
-        <Typography 
-          variant='h5' 
-          component='h2'
-          >
+          <Grid 
+          container
+          spacing={2}
+          alignItems="center"
+          sx={{ mb: 2 }}
+        >
+          <Grid item xs={2} sm="auto">
             <IconButton onClick={handleComplete}>
-                <Check sx={{ color: 'green'}}/>
+              <Check sx={{ color: 'green' }} />
             </IconButton>
-            {todoText}
-            <IconButton onClick={handleEdit} sx={{ float: 'right' }}>
-                <Edit />
+          </Grid>
+          <Grid item xs={10} sm>
+            <Typography component='span' font-size="1.5rem">
+              {todoText}
+            </Typography>
+          </Grid>
+          <Grid item xs={6} sm="auto" sx={{
+            textAlign: { xs: 'center', sm: 'inherit' }
+          }}>
+            <IconButton onClick={handleEdit} >
+              <Edit />
             </IconButton>
-            <IconButton onClick={handleDelete} sx={{ float: 'right' }}>
-                <Delete/>
+          </Grid>
+          <Grid item xs={6} sm="auto" sx={{
+            textAlign: { xs: 'center', sm: 'inherit' }
+          }}>
+            <IconButton onClick={handleDelete}>
+              <Delete />
             </IconButton>
-        </Typography>
+          </Grid>
+        </Grid>
         )}
         {edit && (
           <div style={{ marginTop: '8px' }}>
