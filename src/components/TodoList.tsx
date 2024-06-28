@@ -32,7 +32,7 @@ function TodoList() {
     <CardContent sx={{ padding: '1px', width: '80%'}}>
         { todo && todo.map((todo: TodoState) => {
             return (
-                <TodoItem key={todo.id} id={todo.id} todoText={todo.todo} done={todo.done}/>
+                <TodoItem key={todo.id} id={todo.id} todo={todo.todo} done={todo.done}/>
             )
         })}
     </CardContent>

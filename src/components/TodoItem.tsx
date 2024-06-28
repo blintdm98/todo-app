@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { Card, CardContent, IconButton, Typography, useTheme } from '@mui/material';
-import { Check, Delete } from '@mui/icons-material'
+import { Card, CardContent, IconButton, TextField, Typography, useTheme } from '@mui/material';
+import { Check, Delete, Edit } from '@mui/icons-material'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
 type TodoItemProps = {
   id: string,
-  todoText: string;
+  todo: string;
   done: boolean;
 };
 
-function TodoItem({todoText, id, done: initDone}: TodoItemProps) {
+function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
   const theme = useTheme();
+  const [todoText, setTodoText] = useState(initText);
   const [done, setDone] = useState(initDone);
+  const [edit, setEdit] = useState(false);
 
   const handleDelete = async () => {
     try {
@@ -35,6 +37,27 @@ function TodoItem({todoText, id, done: initDone}: TodoItemProps) {
     }
   }
 
+  const handleEdit = () => {
+    setEdit(true);
+  }
+
+  const handleSave = async () => {
+    try {
+      const todoDoc = doc(db, 'todos', id);
+      await updateDoc(todoDoc, {todo: todoText});
+      console.log('todo updated');
+      setEdit(false);
+    } catch (e) {
+      console.error(e);
+      setTodoText(initText);
+    }
+  }
+
+  const handleCancel = () => {
+    setTodoText(initText);
+    setEdit(false);
+  }
+
   return (
     <Card 
         variant="outlined"
@@ -43,6 +66,13 @@ function TodoItem({todoText, id, done: initDone}: TodoItemProps) {
         }}
     >
       <CardContent>
+      {edit ? (
+          <TextField
+            fullWidth
+            value={todoText}
+            onChange={(e) => setTodoText(e.target.value)}
+          />
+        ) : (
         <Typography 
           variant='h5' 
           component='h2'
@@ -51,10 +81,24 @@ function TodoItem({todoText, id, done: initDone}: TodoItemProps) {
                 <Check sx={{ color: 'green'}}/>
             </IconButton>
             {todoText}
+            <IconButton onClick={handleEdit} sx={{ float: 'right' }}>
+                <Edit />
+            </IconButton>
             <IconButton onClick={handleDelete} sx={{ float: 'right' }}>
                 <Delete/>
             </IconButton>
         </Typography>
+        )}
+        {edit && (
+          <div style={{ marginTop: '8px' }}>
+            <IconButton onClick={handleSave}>
+              <Check sx={{ color: 'green' }} />
+            </IconButton>
+            <IconButton onClick={handleCancel} sx={{ marginLeft: 1 }}>
+              <Delete />
+            </IconButton>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
