@@ -91,6 +91,9 @@ function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
           <Grid item xs={10} sm>
             <Typography component='span' sx={{fontSize:'1.5rem'}}>
               {todoText}
+            </Typography>         
+            <Typography component='span' sx={{ fontSize: '0.75rem', color: 'gray', display: 'block' }}>
+              {done ? 'DONE' : 'IN PROGRESS'}
             </Typography>
           </Grid>
           <Grid item xs={6} sm="auto" sx={{

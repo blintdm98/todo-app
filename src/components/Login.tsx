@@ -33,47 +33,49 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={2}>
-        <FormControl error={!!errors.email}>
-          <FormLabel>Email</FormLabel>
-          <Input 
-            type="email" 
-            placeholder="Type in here…" 
-            {...register('email', { required: 'Email is required' })} 
-          />
-          <FormHelperText>
-            {errors.email && (
-              <Box display="flex" alignItems="center">
-                <InfoOutlined sx={{ mr: 0.5 }} />
-                {errors.email  ? String(errors.email.message) : ""}
-              </Box>
-            )}
-          </FormHelperText>
-        </FormControl>
+    <Box sx={{ width: '100%', maxWidth: '400px', mx: 'auto', mt: 4 }}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack spacing={2}>
+          <FormControl error={!!errors.email}>
+            <FormLabel>Email</FormLabel>
+            <Input 
+              type="email" 
+              placeholder="Type in here…" 
+              {...register('email', { required: 'Email is required' })} 
+            />
+            <FormHelperText>
+              {errors.email && (
+                <Box display="flex" alignItems="center">
+                  <InfoOutlined sx={{ mr: 0.5 }} />
+                  {errors.email  ? String(errors.email.message) : ""}
+                </Box>
+              )}
+            </FormHelperText>
+          </FormControl>
 
-        <FormControl error={!!errors.password}>
-          <FormLabel>Password</FormLabel>
-          <Input 
-            type="password" 
-            placeholder="Type in here…" 
-            {...register('password', { required: 'Password is required' })} 
-          />
-          <FormHelperText>
-            {errors.password && (
-              <>
-                <InfoOutlined />
-                {errors.password.message}
-              </>
-            )}
-          </FormHelperText>
-        </FormControl>
+          <FormControl error={!!errors.password}>
+            <FormLabel>Password</FormLabel>
+            <Input 
+              type="password" 
+              placeholder="Type in here…" 
+              {...register('password', { required: 'Password is required' })} 
+            />
+            <FormHelperText>
+              {errors.password && (
+                <>
+                  <InfoOutlined />
+                  {errors.password.message}
+                </>
+              )}
+            </FormHelperText>
+          </FormControl>
 
-        <Button type="submit" variant="contained" color="primary">
-          Login
-        </Button>
-      </Stack>
-    </form>
+          <Button type="submit" variant="contained" color="primary">
+            Login
+          </Button>
+        </Stack>
+      </form>
+    </Box>
   );
 }
 

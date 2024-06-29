@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Container, Typography } from '@mui/material';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
@@ -8,6 +8,13 @@ import { AuthProvider, useAuth } from './components/AuthProvider';
 
 function AppContent() {
   const { currentUser, signOut } = useAuth();
+
+  const [showLogin, setShowLogin] = useState(true);
+
+  const handleSwitchForm = () => {
+    setShowLogin((prev) => !prev);
+  };
+
   return (
       <Container sx={{paddingTop: '10px',width: {sm:'100%', md:'80%', lg: '100vh'}}}>
         <Box 
@@ -31,17 +38,31 @@ function AppContent() {
           {currentUser ? (
               <>
                 <Button onClick={signOut} variant="contained" color="secondary" sx={{ marginBottom: '1rem' }}>
-                Sign Out
+                  Sign Out
                 </Button>
                 <AddTodo />
                 <TodoList />
               </>
           ) : (
-            <>
-              <Register />
-              <Box sx={{padding: '2rem'}}>or</Box>
-              <Login />
-            </>
+              <>
+                {showLogin ? (
+                  <>
+                    <Login />
+                    <Box sx={{ textAlign: 'center', mt: 2 }}>
+                      <Typography variant="body2">Don't have an account yet?</Typography>
+                      <Button onClick={handleSwitchForm} color="primary">Register here</Button>
+                    </Box>
+                  </>
+                  ) : (
+                  <>
+                    <Register />
+                    <Box sx={{ textAlign: 'center', mt: 2 }}>
+                      <Typography variant="body2">Already have an account?</Typography>
+                      <Button onClick={handleSwitchForm} color="primary">Log in here</Button>
+                    </Box>
+                  </>
+                )}
+              </>
           )}
         </Box>
       </Container>

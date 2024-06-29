@@ -12,7 +12,7 @@ type TodoState = {
 
 function AddTodo() {
     const { currentUser } = useAuth();
-    const { register, handleSubmit, formState: { errors, touchedFields } } = useForm<TodoState>();
+    const { register, handleSubmit, formState: { errors, touchedFields }, reset } = useForm<TodoState>();
 
     const onSubmit = async (data: TodoState) => {
         try {
@@ -26,6 +26,7 @@ function AddTodo() {
         } catch (err) {
             console.error("error", err);
         }
+        reset();
     };
     return (
         <Box sx={{ display: 'flex', width:'80%', mb: 2 }}
