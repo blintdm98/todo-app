@@ -2,7 +2,7 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-import { Button, FormControl, FormHelperText, FormLabel, Input, Stack, TextField } from '@mui/material';
+import { Box, Button, FormControl, FormHelperText, FormLabel, Input, Stack, TextField } from '@mui/material';
 import { InfoOutlined } from '@mui/icons-material';
 
 type LoginState = {
@@ -11,14 +11,24 @@ type LoginState = {
 }
 
 function Login() {
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginState>();
+  //Init the form with react-hook-form
+  const { register, handleSubmit, formState: { errors }, setError } = useForm<LoginState>();
 
+  //Handle form
   const onSubmit: SubmitHandler<LoginState> = async (data) => {
     try {
+      // Attempt to sign in with email and password
       const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
       console.log('User logged in:', userCredential.user);
-    } catch (error) {
-      console.error('Error logging in user:', error);
+    } catch (error: any) {
+      //Error handling, if matches the email or password
+      if (error.code === 'auth/user-not-found') {
+        setError('email', { type: 'manual', message: 'Email address not found' });
+      } else if (error.code === 'auth/wrong-password') {
+        setError('password', { type: 'manual', message: 'Incorrect password' });
+      } else {
+        console.error('Error logging in user:', error);
+      }
     }
   };
 
@@ -34,10 +44,10 @@ function Login() {
           />
           <FormHelperText>
             {errors.email && (
-              <>
-                <InfoOutlined />
-                {errors.email.message}
-              </>
+              <Box display="flex" alignItems="center">
+                <InfoOutlined sx={{ mr: 0.5 }} />
+                {errors.email  ? String(errors.email.message) : ""}
+              </Box>
             )}
           </FormHelperText>
         </FormControl>
