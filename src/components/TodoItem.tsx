@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, Grid, IconButton, TextField, Typography, useTheme } from '@mui/material';
 import { Check, Delete, Edit } from '@mui/icons-material'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
@@ -10,6 +10,7 @@ type TodoItemProps = {
   id: string,
   todo: string;
   done: boolean;
+  createdAt: string;
 };
 
 function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
@@ -21,6 +22,7 @@ function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
 
   const handleDelete = async () => {
     try {
+      // Delete todo document from Firestore
       const todoDoc = doc(db, 'todos', id);
       await deleteDoc(todoDoc);
       console.log('Todo deleted successfully');
@@ -31,7 +33,9 @@ function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
 
   const handleComplete = async () => {
     if (!currentUser) return;
+
     try {
+      // Update 'done' field of todo document in Firestore
       const todoDoc = doc(db, 'todos', id);
       await updateDoc(todoDoc, {done: !done});
       setDone(!done);
@@ -47,17 +51,20 @@ function TodoItem({todo: initText, id, done: initDone}: TodoItemProps) {
 
   const handleSave = async () => {
     try {
+      // Update 'todo' field of todo document in Firestore
       const todoDoc = doc(db, 'todos', id);
       await updateDoc(todoDoc, {todo: todoText});
       console.log('todo updated');
       setEdit(false);
     } catch (e) {
       console.error(e);
+      // Reset todoText to initial value on error
       setTodoText(initText);
     }
   }
 
   const handleCancel = () => {
+    // Cancel editing and reset todoText to initial value
     setTodoText(initText);
     setEdit(false);
   }

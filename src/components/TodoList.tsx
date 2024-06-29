@@ -9,7 +9,7 @@ type TodoState = {
     id: string,
     todo: string,
     done:boolean,
-    createdAt: any,
+    createdAt: string,
     userId: string
 }
 
@@ -23,8 +23,10 @@ function TodoList() {
       return;
     }
 
+    // Firestore query to get todos for the current user
     const q = query(collection(db, 'todos'), where('userId', '==', currentUser.uid));
 
+    // Subscribe to realtime updates on todos collection
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const todosData: TodoState[] = [];
       querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
@@ -55,7 +57,7 @@ function TodoList() {
       {todo.map((todo: TodoState) => {
         return (
           <Box key={todo.id} sx={{ marginBottom: '1rem' }}>
-            <TodoItem key={todo.id} id={todo.id} todo={todo.todo} done={todo.done} />
+            <TodoItem key={todo.id} id={todo.id} todo={todo.todo} done={todo.done} createdAt={todo.createdAt} />
           </Box>
         )
       })}

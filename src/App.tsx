@@ -1,78 +1,16 @@
 import React, { useState } from 'react';
-import { Box, Button, Container, Typography } from '@mui/material';
-import AddTodo from './components/AddTodo';
-import TodoList from './components/TodoList';
-import Register from './components/Register';
-import Login from './components/Login';
-import { AuthProvider, useAuth } from './components/AuthProvider';
+import { AuthProvider } from './components/AuthProvider';
+import AppContent from './components/AppContent';
 
-function AppContent() {
-  const { currentUser, signOut } = useAuth();
-
+function App() {
   const [showLogin, setShowLogin] = useState(true);
 
   const handleSwitchForm = () => {
     setShowLogin((prev) => !prev);
   };
-
-  return (
-      <Container sx={{paddingTop: '10px',width: {sm:'100%', md:'80%', lg: '100vh'}}}>
-        <Box 
-          className="scroll-box"
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            boxShadow: 3,
-            borderRadius: 2,
-            p: 3,
-            height: '90vh',
-            backgroundColor: 'rgba(255, 255, 255, 0.4);',
-            overflow: 'auto',
-            maxHeight: '100%'
-          }}
-        >
-          <Typography variant="h3" gutterBottom>
-            Todo App
-          </Typography>
-          {currentUser ? (
-              <>
-                <Button onClick={signOut} variant="contained" color="secondary" sx={{ marginBottom: '1rem' }}>
-                  Sign Out
-                </Button>
-                <AddTodo />
-                <TodoList />
-              </>
-          ) : (
-              <>
-                {showLogin ? (
-                  <>
-                    <Login />
-                    <Box sx={{ textAlign: 'center', mt: 2 }}>
-                      <Typography variant="body2">Don't have an account yet?</Typography>
-                      <Button onClick={handleSwitchForm} color="primary">Register here</Button>
-                    </Box>
-                  </>
-                  ) : (
-                  <>
-                    <Register />
-                    <Box sx={{ textAlign: 'center', mt: 2 }}>
-                      <Typography variant="body2">Already have an account?</Typography>
-                      <Button onClick={handleSwitchForm} color="primary">Log in here</Button>
-                    </Box>
-                  </>
-                )}
-              </>
-          )}
-        </Box>
-      </Container>
-  );
-}
-
-function App() {
   return (
     <AuthProvider>
-      <AppContent />
+      <AppContent showLogin={showLogin} handleSwitchForm={handleSwitchForm}/>
     </AuthProvider>
   );
 }

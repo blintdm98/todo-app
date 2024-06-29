@@ -12,10 +12,13 @@ type TodoState = {
 
 function AddTodo() {
     const { currentUser } = useAuth();
+    // React Hook Form for form handling
     const { register, handleSubmit, formState: { errors, touchedFields }, reset } = useForm<TodoState>();
 
+    // Handle form submission
     const onSubmit = async (data: TodoState) => {
         try {
+            // Add a new document to the 'todos' collection in Firestore
             await addDoc(collection(db, 'todos'), {
                 todo: data.todo,
                 done: false,
@@ -26,7 +29,7 @@ function AddTodo() {
         } catch (err) {
             console.error("error", err);
         }
-        reset();
+        reset(); // Reset form fields after submission
     };
     return (
         <Box sx={{ display: 'flex', width:'80%', mb: 2 }}
